@@ -10,7 +10,11 @@ Ce site est composé d'un front-office (la partie visible pour l'utilisateur lam
 ```
 git clone https://github.com/Sanbye/Fisherman-Instruments-Web-Site.git
 ```
-Puis sélectionner l'emplacement où vous souhaitez installer le projet.
+Puis sélectionner l'emplacement du projet.
+
+```
+cd DocGuitareShop
+```
 
 2. Vérifier bien avoir les bonnes versions de PHP et Symfony :
 
