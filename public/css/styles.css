@@ -141,7 +141,7 @@ nav{
     color: var(--font_color_nav);
     padding: 10px;
     border-radius: 20px;
-    font-size: 4vh;
+    font-size: 2rem;
     text-decoration: none;
     position: relative;
     cursor: pointer;
@@ -569,6 +569,7 @@ form{
     width: 100vh;
     height: 100vw;
     transform: rotate(-90deg) translateX(-100vh);
+    -moz-transform: rotate(-90deg) translateX(-100vh);
     transform-origin: top left;
     overflow-x: hidden;
     overflow-y: scroll;
@@ -631,6 +632,7 @@ form{
     flex-direction: row;
     min-width: 4000vw;
     transform: rotate(90deg) translateY(-100vh);
+    -moz-transform: rotate(90deg) translateY(-100vh);
     transform-origin: top left;
 }
 

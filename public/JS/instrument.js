@@ -120,3 +120,7 @@ function disableObserver(){
             }),
         600);
 }
+
+/* fix comptabilité firefox*/
+
+document.querySelector("body").style.position = "fixed";
