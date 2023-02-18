@@ -1,0 +1,158 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Doc'Guitar Shop | Accueil{% endblock %}
+
+{% block body %}
+
+<div class="scroll" {% if is_granted('ROLE_ADMIN') %} style="scroll-snap-type: none" {% endif %}>
+
+    <section class="presentation">
+
+        <div class="cover">
+            <img src="{{ asset("img/wallpaper.jpg") }}" alt="Image de cover (guitare)">
+        </div>
+
+        <div>
+            <h1>Doc'Guitar Shop</h1>
+        </div>
+
+
+    </section>
+
+    <section class="main">
+
+        <a href="#articles" class="circle">
+            <div class="fleche bas">
+                <div></div>
+            </div>
+        </a>
+
+        <div id="articles" class="article_container">
+
+            {% if is_granted("ROLE_ADMIN") %}
+                {% include 'admin/adminHome.html.twig' %}
+            {% endif %}
+
+            {% for section in sections|sort((a, b) => a.position <=> b.position) %}
+
+                <div class="div_article_aspect1">
+
+                    {% if is_granted("ROLE_ADMIN") %}
+
+                    <div class="buttons_section">
+
+                        <div>
+                            <a href="{{ path("admin_modifier", {'id': section.id}) }}">
+                                <button type="button" class="button">
+                                    MODIFIER
+                                </button>
+                            </a>
+                        </div>
+
+
+                        <div>
+                            <a href="{{ path("admin_suppr" , {'id': section.id}) }}">
+                                <button type="button" class="button" onclick="return confirm('êtes vous sûr de vouloir supprimer cette section? ({{ section.titre }})')">
+                                    SUPPRIMER
+                                </button>
+                            </a>
+                        </div>
+
+
+                    </div>
+
+                    {% endif %}
+
+                    {% if section.alaUne %}
+
+
+                        <article>
+
+                            <div class="AlaUne">
+
+                                {% set instrument = section.alaUne.instrument %}
+
+                                <div class="AlaUne_img_container">
+
+                                    <div class="card show">
+
+                                        <div class="img_container">
+
+                                            <div class="slider">
+
+                                                {% for image in instrument.images %}
+
+
+                                                    <div>
+                                                        <img id="{{ image.id }}" class="_img" src="{{asset('uploads/images_uploads/' ~ image.nom ) }}" onclick="resize({{ image.id }})" alt="aperçu de l'instrument">
+                                                    </div>
+
+                                                {% endfor %}
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="AlaUne_text">
+
+                                    <h1 class="titre">
+                                        {{ section.titre }}
+                                    </h1>
+
+                                    {{ section.text|nl2br }}
+                                    {% if instrument.prix %}
+                                        <p>A partir de : {{ instrument.prix }} €</p>
+                                    {% endif %}
+                                    <p><a href="{{ path('instruments') }}" style="color: #5eb5e0">Voir la page Instruments</a></p>
+
+                                </div>
+
+
+                            </div>
+
+                        </article>
+                    {% else %}
+
+                    <article>
+
+                        <h1 class="titre">
+                            {{ section.titre }}
+                        </h1>
+
+                        <div class="text_section show">
+
+                            {% if section.image %}
+                                <img class="main_img" src="{{ asset('uploads/images_uploads/' ~ section.image) }}">
+                            {% endif %}
+
+                            {{ section.text|nl2br }}
+
+                        </div>
+
+                    </article>
+
+                   {% endif %}
+
+                </div>
+            {% endfor %}
+
+        </div>
+
+    </section>
+
+
+
+</div>
+
+
+
+{% if is_granted('ROLE_ADMIN') %}
+    <script src="{{ asset('JS/newSectionForm.js') }}"></script>
+{% endif %}
+    <script src="{{ asset('JS/slider.js') }}"></script>
+    <script src="{{ asset('JS/homeStyle.js') }}"></script>
+
+{% endblock %}

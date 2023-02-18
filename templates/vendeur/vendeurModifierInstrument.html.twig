@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <section class="main">
+        <div class="article_container">
+            <div class="div_article_aspect1">
+
+                <div class="form show">
+
+                    {{ form_start(instrumentForm) }}
+
+                    {{ form_label(instrumentForm.nom) }}
+                    {{ form_widget(instrumentForm.nom) }}
+
+                    <div class="container" style="height: 40vh; margin-top: 0">
+                        <div class="img_container" style="height: 100%">
+
+                            <div class="img_container">
+
+                                <div class="slider">
+
+                                    {% for image in instrument.images %}
+
+
+                                        <div>
+                                            <img id="{{ image.id }}" class="_img" loading="lazy" src="{{asset('uploads/images_uploads/' ~ image.nom ) }}" onclick="resize({{ image.id }})" alt="aperçu de l'instrument">
+                                        </div>
+
+                                    {% endfor %}
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    {{ form_label(instrumentForm.images) }}
+                    {{ form_widget(instrumentForm.images) }}
+
+                    {{ form_label(instrumentForm.description) }}
+
+                    {{ form_widget(instrumentForm.description) }}
+
+                    {{ form_label(instrumentForm.position) }}
+                    {{ form_widget(instrumentForm.position) }}
+
+                    {{ form_widget(instrumentForm.valider) }}
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <script src="{{ asset('JS/slider.js') }}"></script>
+
+{% endblock %}

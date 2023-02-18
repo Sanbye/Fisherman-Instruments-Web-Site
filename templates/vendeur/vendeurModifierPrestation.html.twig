@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Prestations{% endblock %}
+
+{% block body %}
+
+    <section class="main">
+
+        <a href="{{ path('prestations') }}">
+            <button type="button" class="button">Retour</button>
+        </a>
+
+
+
+        <table class="content-table show">
+            <thead>
+            <tr>
+                <th>Prestations: </th>
+                <th>Prix: </th>
+                <th>Position: </th>
+                <th>Modifier: </th>
+            </tr>
+            </thead>
+            <tbody>
+
+            {% for prestation in prestations|sort((a, b) => a.position <=> b.position) %}
+                <tr>
+
+                    {{ form_start(prestationForm) }}
+
+                    {% if prestation.id == id %}
+                        <td>{{ form_widget(prestationForm.type )}}</td>
+                        <td>{{ form_widget(prestationForm.prix )}}</td>
+                        <td>{{ form_widget(prestationForm.position) }}</td>
+                        <td>{{ form_widget(prestationForm.valider) }}</td>
+                    {% else %}
+
+                    <td>{{ prestation.type }}</td>
+                    <td>{{ prestation.prix }} €</td>
+                    <td>{{ prestation.position }}</td>
+
+                    <td>
+
+                        <a href="{{ path("vendeur_prestations_modifier", {'id': prestation.id}) }}">
+                            <button type="button" class="button" >
+                                Modifier
+                            </button>
+                        </a>
+
+                        <a href="{{ path("vendeur_prestations_suppr", {'id': prestation.id}) }}">
+                            <button type="button" class="button" onclick="return confirm('êtes vous sûr de vouloir supprimer cette prestation? ({{ prestation.type }})')" >
+                                Supprimer
+                            </button>
+                        </a>
+
+                    </td>
+
+                    {% endif %}
+                </tr>
+
+
+            {% endfor %}
+
+            {{ form_row(prestationForm._token) }}
+
+            </tbody>
+        </table>
+    </section>
+
+{% endblock %}

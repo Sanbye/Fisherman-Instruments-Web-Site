@@ -1,0 +1,121 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Doc'Guitar Shop | Instruments{% endblock %}
+
+{% block body %}
+
+    {% if is_granted('ROLE_VENDEUR') %}
+
+        {% if instruments|length == 0 %}
+            <a class="main" href="{{ path("vendeur_instrument_ajouter")}}">
+                <button type="button" class="button">AJOUTER</button>
+            </a>
+        {% endif %}
+    {% endif %}
+
+    <section class="aperçu_instruments_container">
+        <div id="aperçu_instruments">
+
+            {% for instrument in instruments|sort((a, b) => a.position <=> b.position) %}
+                <a class="link_aperçu_instrument">
+                    <img src="{{ 'uploads/images_uploads/' ~ instrument.preview }}" class="aperçu" alt="aperçu de l'instrument">
+                </a>
+            {% endfor %}
+        </div>
+    </section>
+
+    {% if is_granted('ROLE_VENDEUR') %}
+        <div class="ajouter_instrument">
+            <a href="{{ path("vendeur_instrument_ajouter")}}">
+                <button type="button" class="button">AJOUTER</button>
+            </a>
+        </div>
+    {% endif %}
+
+    <section class="instruments">
+
+        <div class="cards_container">
+
+            {% set i=1 %}
+
+            {% for instrument in instruments|sort((a, b) => a.position <=> b.position) %}
+
+                <div class="container" id="container{{ i }}">
+                    <div class="card_container">
+
+                        <div class="card show" id="card{{ i }}">
+
+                            <h1 class="titre titreInstrument">{{ instrument.nom }}</h1>
+
+                            {% if is_granted('ROLE_VENDEUR') %}
+
+                                <div class="buttons_instruments">
+
+                                    <div>
+                                        <a href="{{ path("vendeur_instrument_modifier", {'id':instrument.id}) }}">
+                                            <button type="button" class="button">MODIFIER</button>
+                                        </a>
+                                    </div>
+
+                                    <div>
+                                        <a href="{{ path("vendeur_instrument_suppr" , {'id': instrument.id}) }}">
+                                            <button type="button" class="button" onclick="return confirm('êtes vous sûr de vouloir supprimer l\'instrument {{ instrument.nom }} ?')">
+                                                SUPPRIMER
+                                            </button>
+                                        </a>
+                                    </div>
+
+
+                                </div>
+
+                            {% endif %}
+
+                            <div class="img_container">
+
+                                <div class="slider">
+
+                                    {% for image in instrument.images %}
+
+
+                                        <div>
+                                            <img id="{{ image.id }}" class="_img" loading="lazy" src="{{asset('uploads/images_uploads/' ~ image.nom ) }}" onclick="resize({{ image.id }})" alt="aperçu de l'instrument">
+                                        </div>
+
+                                    {% endfor %}
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="enSavoirPlus_container">
+                        <button class="button enSavoirPlus" onclick="showText('{{ i }}')">En savoir plus</button>
+                    </div>
+
+                    <div id="text{{ i }}" class="infos_text_container">
+                        <div class="infos_texts">
+
+                            {{ instrument.description|nl2br }}
+                            {% if instrument.prix %}
+                                <p>A partir de : {{ instrument.prix }} €</p>
+                            {% endif %}
+
+                        </div>
+                    </div>
+
+                </div>
+
+                {% set i=i+1 %}
+            {% endfor %}
+        </div>
+
+    </section>
+
+    <script src="{{ asset('JS/slider.js') }}"></script>
+    <script src="{{ asset('JS/instrument.js') }}"></script>
+
+
+{% endblock %}

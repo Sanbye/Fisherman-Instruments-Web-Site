@@ -1,0 +1,45 @@
+
+<div class="div_article_aspect1">
+    <article>
+        <h1>Bienvenue {{ app.user.prenom }}</h1>
+
+        <div class="form show">
+            <p> Cette section ne s'affiche que lorsque vous êtes connecté en tant qu'admin</p>
+
+            <button id="ajouterButton" class="button_new_section button" onclick="newSection()">Ajouter une Section</button>
+
+            <div class="new_section">
+
+                {{ form_start(sectionForm) }}
+
+                {{ form_label(sectionForm.titre) }}
+                {{ form_widget(sectionForm.titre) }}
+
+                {{ form_label(sectionForm.image) }}
+                {{ form_widget(sectionForm.image) }}
+
+                {{ form_label(sectionForm.text) }}
+                {{ form_widget(sectionForm.text) }}
+
+                {{ form_label(sectionForm.instrument) }}
+                {{ form_widget(sectionForm.instrument) }}
+
+                {{ form_label(sectionForm.position) }}
+                {{ form_widget(sectionForm.position) }}
+
+                <div class="buttons">
+                    {{ form_widget(sectionForm.valider) }}
+                    {{ form_widget(sectionForm.annuler) }}
+                </div>
+
+                {{ form_row(sectionForm._token) }}
+
+            </div>
+        </div>
+
+    </article>
+
+</div>
+
+
+

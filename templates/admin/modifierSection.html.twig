@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<section class="main">
+    <div class="article_container">
+        <div class="div_article_aspect1">
+            <article>
+                <h1>MODIFICATION DE LA SECTION</h1>
+                <div class="form show">
+                    <div class="new_section" style="display:block">
+
+                        {{ form_start(sectionForm) }}
+
+                        {{ form_label(sectionForm.titre) }}
+                        {{ form_widget(sectionForm.titre) }}
+
+                        {{ form_label(sectionForm.image) }}
+                        {{ form_widget(sectionForm.image) }}
+
+                        {{ form_label(sectionForm.text) }}
+                        {{ form_widget(sectionForm.text) }}
+
+                        {{ form_label(sectionForm.instrument) }}
+                        {{ form_widget(sectionForm.instrument) }}
+
+                        {{ form_label(sectionForm.position) }}
+                        {{ form_widget(sectionForm.position) }}
+
+                        <div class="buttons">
+                            {{ form_widget(sectionForm.valider) }}
+                            <button class="button_new_section button"><a href="{{ path('admin_home') }}">Annuler</a></button>
+                        </div>
+
+                        {{ form_row(sectionForm._token) }}
+
+                    </div>
+                </div>
+            </article>
+        </div>
+    </div>
+</section>
+
+    <script src="{{ asset('JS/newSectionForm.js') }}"></script>
+{% endblock %}

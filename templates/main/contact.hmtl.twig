@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contact{% endblock %}
+
+{% block body %}
+
+    <div class="div_article_aspect1">
+        <div class="form show">
+            {{ form_start(infoForm) }}
+            {{ form_widget(infoForm.nom) }}
+            {{ form_widget(infoForm.prenom) }}
+            {{ form_widget(infoForm.mail) }}
+            {{ form_widget(infoForm.telephone) }}
+            {{ form_widget(infoForm.text) }}
+            {{ form_widget(infoForm.valider) }}
+            {{ form_end(infoForm) }}
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,51 @@
+<nav>
+
+    <div class="overlay" onclick=openBurger()></div>
+
+    <img class="logo" src="{{ asset("img/logo flyer.webp") }}">
+
+    <h1 class="FISHERMAN-INSTRUMENTS">FISHERMAN'S INSTRUMENTS</h1>
+
+    <div class="header_container">
+
+        <ul class="burger_links">
+            <li>
+                <a class="nav_link" href="{{ path('home') }}">Accueil</a>
+            </li >
+
+            <li>
+                <a class="nav_link" href="{{ path('fisherman') }}">The Fisherman</a>
+            </li>
+
+            <li>
+                <a class="nav_link" href="{{ path('instruments') }}">Instruments sur mesure</a>
+            </li>
+
+            <li>
+                <a class="nav_link" href="{{ path('prestations') }}">Prestations</a>
+            </li>
+
+            <li>
+                <a class="nav_link" href="{{ path('artistes') }}">Artistes</a>
+            </li>
+
+            <li>
+                <a class="nav_link" href="{{ path('contact') }}">Contact</a>
+            </li>
+        </ul>
+
+    </div>
+
+    <div id="menu_burger">
+
+        <div class="burger" onclick=openBurger()>
+            <div class="ligne"></div>
+        </div>
+
+    </div>
+
+
+
+
+
+</nav>

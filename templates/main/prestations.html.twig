@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Prestations{% endblock %}
+
+{% block body %}
+
+    <section class="main">
+
+        {% if is_granted('ROLE_VENDEUR') %}
+
+            <a href="{{ path('vendeur_prestations_ajouter') }}">
+                <button id="ajouterButton" class="button" >
+                    Ajouter
+                </button>
+            </a>
+
+
+        {% endif %}
+
+        <table class="content-table show">
+            <thead>
+            <tr>
+                <th>Prestations: </th>
+                <th>Prix: </th>
+            </tr>
+            </thead>
+            <tbody>
+
+            {% for prestation in prestations|sort((a, b) => a.position <=> b.position) %}
+                <tr>
+                    <td>{{ prestation.type }}</td>
+                    <td>{{ prestation.prix }} €</td>
+                </tr>
+
+            {% endfor %}
+
+            </tbody>
+        </table>
+    </section>
+
+{% endblock %}

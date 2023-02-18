@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Prestations{% endblock %}
+
+{% block body %}
+
+    <section class="main">
+
+        <section class="form show">
+            {{ form(prestationForm) }}
+            <button class="button"><a href="{{ path('prestations') }}">Annuler</a></button>
+        </section>
+
+        <table class="content-table show">
+            <thead>
+            <tr>
+                <th>Prestations: </th>
+                <th>Prix: </th>
+                <th>Position: </th>
+                <th>Modifier: </th>
+            </tr>
+            </thead>
+            <tbody>
+
+                {% for prestation in prestations|sort((a, b) => a.position <=> b.position) %}
+                    <tr>
+                        <td>{{ prestation.type }}</td>
+                        <td>{{ prestation.prix }} €</td>
+                        <td>{{ prestation.position }}</td>
+                        <td>
+                            <a href="{{ path("vendeur_prestations_modifier", {'id': prestation.id}) }}">
+                                <button class="button">Modifier</button>
+                            </a>
+
+                            <a href="{{ path("vendeur_prestations_suppr", {'id': prestation.id}) }}">
+                                <button type="button" class="button" onclick="return confirm('êtes vous sûr de vouloir supprimer cette prestation? ({{ prestation.type }})')" >Supprimer</button>
+                            </a>
+                        </td>
+                    </tr>
+
+
+                {% endfor %}
+
+            </tbody>
+        </table>
+    </section>
+
+{% endblock %}

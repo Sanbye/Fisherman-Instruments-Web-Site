@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+
+<section class="main">
+
+    <div class="div_article_aspect1">
+
+        <div class="form">
+
+            <h1>Inscrire un nouveau utilisateur</h1>
+
+            {{ form_start(registrationForm) }}
+            {{ form_widget(registrationForm) }}
+
+            <button type="submit" class="btn">Register</button>
+            {{ form_end(registrationForm) }}
+        </div>
+
+    </div>
+
+    <table class="content-table">
+        <thead>
+        <tr>
+            <th>Utilisateur: </th>
+            <th>Nom: </th>
+            <th>Prénom: </th>
+            <th>Rôle: </th>
+            <th>Supprimer l'utilisateur: </th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for user in allUser%}
+            <tr>
+                <td>{{ user.username }}</td>
+                <td>{{ user.nom}} </td>
+                <td>{{ user.prenom}} </td>
+                <td>{{ user.roles[0]}} </td>
+                <td>
+                    <a href="{{ path("admin_user_suppr", {'id': user.id}) }}">
+                        <button type="button" class="button"
+                        onclick="return confirm('êtes vous sûr de vouloir supprimer cet utilisateur? ({{ user.username }})')">
+                            Supprimer
+                        </button>
+                    </a>
+                </td>
+            </tr>
+
+        {% endfor %}
+
+        </tbody>
+    </table>
+
+</section>
+
+{% endblock %}

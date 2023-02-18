@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <section class="main">
+        <div class="article_container">
+            <div class="div_article_aspect1">
+                <article>
+                    <h1>Ajout d'un instrument: </h1>
+
+                    <div class="form show" style="display:block">
+                        {{ form(instrumentForm) }}
+                    </div>
+
+                </article>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
